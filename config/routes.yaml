@@ -1,0 +1,30 @@
+# index:
+#    path: /
+#    controller: App\Controller\DefaultController::index
+
+product_by_id:
+    path: /products/{id}
+    controller: App\Controller\ProductsController::getProductById
+    methods: [GET]
+    requiments:
+        id: '[0-9]+'
+
+product_create:
+    path: /products
+    controller: App\Controller\ProductsController::createProduct
+    methods: [POST]
+
+product_delete:
+    path: /products
+    controller: App\Controller\ProductsController::deleteProduct
+    methods: [POST]
+
+products_list:
+    path: /products
+    controller: App\Controller\ProductsController::listAllProducts
+    methods: [GET]
+
+categories_list:
+    path: /products
+    controller: App\Controller\CategoriesController::listAllCategories
+    methods: [GET]

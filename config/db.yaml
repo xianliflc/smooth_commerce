@@ -1,0 +1,7 @@
+
+db_config:
+  host: 127.0.0.1
+  db: spicy
+  user: root
+  pass: root
+  charset: utf8
