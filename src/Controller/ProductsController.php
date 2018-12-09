@@ -34,7 +34,7 @@ class ProductsController extends AbstractController
     {
         try {
             $data = json_decode($request->getContent());
-            $result = (new ProductsContainer())->create('');
+            $result = (new ProductsContainer())->create($data);
             return $this->json($result);
         } catch (\Exception $e) {
             return $this->json(['success' => false, 'error' => ['message' => $e->getMessage()]]);

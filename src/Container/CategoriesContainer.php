@@ -12,8 +12,7 @@ class CategoriesContainer extends Container {
     }
 
     public function list() {
-        $query = 'select * from categories';
-        return $this->dql->query($query);
+        return $this->dal->selectAll('categories');
     }
 
 }

@@ -11,7 +11,7 @@ class ProductsContainer extends Container {
     }
 
     public function list() {
-        return $this->dal->query('select * from products');
+        return $this->dal->selectAll('products');
     }
 
     public function getById($id) {
@@ -19,11 +19,13 @@ class ProductsContainer extends Container {
     }
 
     public function createProduct($object) {
-        return $this->dal->create();
+        $result =  $this->dal->create('', $object);
+        return $result->affectedRows > 0;
     }
 
     public function deleteProduct($id) {
-        return $this->dal->delete($id);
+        $result =  $this->dal->delete($id);
+        return $result->affectedRows > 0;
     }
 
 }

@@ -8,7 +8,7 @@ use \PDO;
 
 class DBAL {
 
-    protected $db;
+    private $db;
 
     public function __construct(string $schema = "")
     {
@@ -31,17 +31,23 @@ class DBAL {
     }
 
     public function useSchema($s) {
-        $this->query('use ' . $a);
+        $this->query('use ' . $s);
         return $this;
     }
 
-    public function query($sql, $data) {
-        $stmt = $this->db->query($sql)->fetchAll();
-        return $stmt;
+    public function query($sql, $data = []) {
+        try {
+            $sth = $this->db->prepare($sql, array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
+            $sth->execute($data);
+            return $sth->fetchAll();
+        } catch(\Exception $e) {
+            return null;
+        }
+
     }
 
     public function selectAll($table) {
-        $stmt = $this->db->query('select * from ' . $table)->fetchAll();
+        $stmt = $this->db->query('select * from ' . $table);
         return $stmt;
     }
 
