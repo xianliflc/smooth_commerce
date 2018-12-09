@@ -19,12 +19,27 @@ class ProductsController extends AbstractController
     public function getProductById(Request $request)
     {
         $id = $request->get('id');
-        $con = (new ProductsContainer())->list();
+        $result = (new ProductsContainer())->getById();
+        return $this->json($result);
     }
 
-    public function listAllProducts()
+    public function deleteProduct(Request $request)
     {
-        $con = (new ProductsContainer())->list();
+        $id = $request->get('id');
+        $result = (new ProductsContainer())->deleteById($id);
+        return $this->json($result);
+    }
+
+    public function createProduct(Request $request)
+    {
+        try {
+            $data = json_decode($request->getContent());
+            $result = (new ProductsContainer())->create('');
+            return $this->json($result);
+        } catch (\Exception $e) {
+            return $this->json(['success' => false, 'error' => ['message' => $e->getMessage()]]);
+        }
+
     }
 
 }

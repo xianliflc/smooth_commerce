@@ -14,15 +14,16 @@ class ProductsContainer extends Container {
         return $this->dal->query('select * from products');
     }
 
-    public function getProductById($id) {
+    public function getById($id) {
         return $this->dal->query('select * from products where id = ' . $id);
     }
 
     public function createProduct($object) {
+        return $this->dal->create();
     }
 
-    public function deleteProduct($object) {
-
+    public function deleteProduct($id) {
+        return $this->dal->delete($id);
     }
 
 }

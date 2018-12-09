@@ -30,8 +30,12 @@ class DBAL {
 
     }
 
+    public function useSchema($s) {
+        $this->query('use ' . $a);
+        return $this;
+    }
 
-    public function query($sql) {
+    public function query($sql, $data) {
         $stmt = $this->db->query($sql)->fetchAll();
         return $stmt;
     }
@@ -41,8 +45,12 @@ class DBAL {
         return $stmt;
     }
 
-    public function create() {
-        
+    public function create($sql, $data) {
+        return $this->query($sql, $data);
+    }
+
+    public function delete($sql, $data) {
+        return $this->query($sql, $data);
     }
 
 
